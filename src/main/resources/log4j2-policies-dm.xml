@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Policies>
+  <OnStartupTriggeringPolicy />
+  <SizeBasedTriggeringPolicy size="300 MB" />
+  <TimeBasedTriggeringPolicy interval="1"
+    modulate="true" />
+</Policies>

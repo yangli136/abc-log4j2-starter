@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration xmlns:xi="http://www.w3.org/2001/XInclude" status="DEBUG" name="log4j2-AuthEsiDm" monitorInterval="30">
+  <Properties>
+    <Property name="logPath">${log.file.location}</Property>
+    <Property name="text.log.pattern">%d{yyyy-MM-HH:mm:ss.SSS} [%t - %X{HOSTNAME,APPLICATION,CORRELATION_ID,MESSAGE_ID}] %highlight{%level}{FATAL=bg_red, ERROR=red, WARN=yellow, INFO=green, DEBUG=blue} %c{3} - %m%n</Property>
+  </Properties>
+
+  <Appenders>
+    <Console name="console" target="SYSTEM_OUT">
+      <PatternLayout pattern="${text.log.pattern}" />
+    </Console>
+
+    <RollingFile name="serverJson" fileName="${logPath}/server.json"
+      filePattern="${logPath}/server_%d{yyyy-MM-dd}.%i.json">
+      <LogstashLayout dateTimeFormatPattern="yyyy-MM-dd'T'HH:mm:ss.SSSZZZ"
+        templateUri="classpath:LogstashJsonEventLayoutV1.json" prettyPrintEnabled="false" stackTraceEnabled="true" />
+      <xi:include href="log4j2-policies-dm.xml" />
+      <xi:include href="log4j2-rolloverStrategies-dm.xml" />
+    </RollingFile>
+
+    <RollingFile name="serverText" fileName="${logPath}/server.log"
+      filePattern="${logPath}/server_%d{yyyy-MM-dd}.log">
+      <PatternLayout pattern="${text.log.pattern}" />
+      <xi:include href="log4j2-policies-dm.xml" />
+      <xi:include href="log4j2-rolloverStrategies-dm.xml" />
+    </RollingFile>
+
+    <RollingFile name="exceptionText" fileName="${logPath}/exception.log"
+      filePattern="${logPath}/exception_%d{yyyy-MM-dd}.log">
+      <Filters>
+        <ThresholdFilter level="WARN" onMatch="ACCEPT" />
+      </Filters>
+      <PatternLayout pattern="${text.log.pattern}" />
+      <xi:include href="log4j2-policies-dm.xml" />
+      <xi:include href="log4j2-rolloverStrategies-dm.xml" />
+    </RollingFile>
+
+    <RollingFile name="eventText" fileName="${logPath}/event.log"
+      filePattern="${logPath}/event_%d{yyyy-MM-dd}.log">
+      <PatternLayout pattern="${text.log.pattern}" />
+      <xi:include href="log4j2-policies-dm.xml" />
+      <xi:include href="log4j2-rolloverStrategies-dm.xml" />
+    </RollingFile>
+
+    <RollingFile name="statsText" fileName="${logPath}/stats.log"
+      filePattern="${logPath}/stats_%d{yyyy-MM-dd}.log">
+      <PatternLayout pattern="${text.log.pattern}" />
+      <xi:include href="log4j2-policies-dm.xml" />
+      <xi:include href="log4j2-rolloverStrategies-dm.xml" />
+    </RollingFile>
+
+    <RollingFile name="perfText" fileName="${logPath}/perf.log"
+      filePattern="${logPath}/perf_%d{yyyy-MM-dd}.log">
+      <PatternLayout pattern="${text.log.pattern}" />
+      <xi:include href="log4j2-policies-dm.xml" />
+      <xi:include href="log4j2-rolloverStrategies-dm.xml" />
+    </RollingFile>
+
+    <RollingFile name="sqlText" fileName="${logPath}/sql.log"
+      filePattern="${logPath}/sql_%d{yyyy-MM-dd}.log">
+      <PatternLayout pattern="${text.log.pattern}" />
+      <xi:include href="log4j2-policies-dm.xml" />
+      <xi:include href="log4j2-rolloverStrategies-dm.xml" />
+    </RollingFile>
+  </Appenders>
+
+  <Loggers>
+    <Root level="info" additivity="false">
+      <AppenderRef ref="console" />
+      <AppenderRef ref="serverText" />
+      <AppenderRef ref="serverJson" />
+      <AppenderRef ref="exceptionText" />
+    </Root>
+
+    <logger name="EVENT" level="info" additivity="false">
+      <AppenderRef ref="eventText" />
+      <AppenderRef ref="console" />
+    </logger>
+    <logger name="STATISTICS" level="info" additivity="false">
+      <AppenderRef ref="statsText" />
+    </logger>
+    <logger name="PERFORMANCE" level="info" additivity="false">
+      <AppenderRef ref="perfText" />
+    </logger>
+
+    <logger name="SQL" level="info" additivity="false">
+      <AppenderRef ref="sqlText" />
+      <AppenderRef ref="console" />
+    </logger>
+    <logger name="com.zaxxer.hikari" level="debug" additivity="false">
+      <AppenderRef ref="sqlText" />
+    </logger>
+    <logger name="java.sql" level="debug" additivity="false">
+      <AppenderRef ref="sqlText" />
+    </logger>
+    <logger name="org.apache.ibatis" level="debug" additivity="false">
+      <AppenderRef ref="sqlText" />
+    </logger>
+    <logger name="org.mybatis" level="debug" additivity="false">
+      <AppenderRef ref="sqlText" />
+    </logger>
+    <logger name="org.abcframework.dao.generated.mapper" level="trace" additivity="false">
+      <AppenderRef ref="sqlText" />
+    </logger>
+    <logger name="org.springframework.jdbc.core" level="trace" additivity="true">
+      <AppenderRef ref="sqlText" />
+    </logger>
+  </Loggers>
+
+</Configuration>

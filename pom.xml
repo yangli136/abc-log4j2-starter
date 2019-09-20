@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+  <groupId>org.abcframework</groupId>
+  <artifactId>abc-parent</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  </parent>
+  <artifactId>abc-log4j2-starter</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>abc-log4j2-starter</name>
+  <description>Abc Log4j2 starter</description>
+
+  <properties>
+    <log4j2-logstash-layout.version>0.19</log4j2-logstash-layout.version>
+  </properties>
+
+  <dependencies>
+    <!-- logging -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-log4j2</artifactId>
+    </dependency>
+
+    <!-- logstash layout -->
+    <dependency>
+      <groupId>com.vlkan.log4j2</groupId>
+      <artifactId>log4j2-logstash-layout</artifactId>
+      <version>${log4j2-logstash-layout.version}</version>
+    </dependency>
+  </dependencies>
+
+  <profiles>
+    <profile>
+      <id>local</id>
+      <activation>
+        <os>
+          <family>windows</family>
+        </os>
+      </activation>
+      <properties>
+        <log.file.location>C:/temp/abc/logs</log.file.location>
+      </properties>
+    </profile>
+    <profile>
+      <id>server</id>
+      <activation>
+        <os>
+          <family>!windows</family>
+        </os>
+      </activation>
+      <properties>
+        <log.file.location>/app/abc/logs</log.file.location>
+      </properties>
+    </profile>
+  </profiles>
+</project>

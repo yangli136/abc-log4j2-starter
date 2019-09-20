@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DefaultRolloverStrategy>
+  <Delete basePath="${logPath}" maxDepth="2">
+    <IfFileName glob="*.(json|log)" />
+    <IfLastModified age="7d" />
+  </Delete>
+</DefaultRolloverStrategy>
