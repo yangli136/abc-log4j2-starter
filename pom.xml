@@ -5,10 +5,10 @@
   <parent>
   <groupId>org.abcframework</groupId>
   <artifactId>abc-parent</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>0.0.2-SNAPSHOT</version>
   </parent>
   <artifactId>abc-log4j2-starter</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>0.0.2-SNAPSHOT</version>
   <name>abc-log4j2-starter</name>
   <description>Abc Log4j2 starter</description>
 
