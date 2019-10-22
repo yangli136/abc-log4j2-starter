@@ -5,15 +5,17 @@
   <parent>
   <groupId>org.abcframework</groupId>
   <artifactId>abc-parent</artifactId>
-  <version>0.0.2-SNAPSHOT</version>
+  <version>0.0.3-SNAPSHOT</version>
   </parent>
   <artifactId>abc-log4j2-starter</artifactId>
-  <version>0.0.2-SNAPSHOT</version>
+  <version>0.0.3-SNAPSHOT</version>
   <name>abc-log4j2-starter</name>
   <description>Abc Log4j2 starter</description>
 
   <properties>
     <log4j2-logstash-layout.version>0.19</log4j2-logstash-layout.version>
+    <local-log-location>C:/temp/abc/logs</local-log-location>
+    <server-log-location>/app/abc/logs</server-log-location>
   </properties>
 
   <dependencies>
@@ -40,7 +42,7 @@
         </os>
       </activation>
       <properties>
-        <log.file.location>C:/temp/abc/logs</log.file.location>
+        <log.file.location>${local-log-location}</log.file.location>
       </properties>
     </profile>
     <profile>
@@ -51,7 +53,7 @@
         </os>
       </activation>
       <properties>
-        <log.file.location>/app/abc/logs</log.file.location>
+        <log.file.location>${server-log-location}</log.file.location>
       </properties>
     </profile>
   </profiles>
