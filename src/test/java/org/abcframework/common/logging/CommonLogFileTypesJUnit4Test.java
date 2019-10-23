@@ -2,7 +2,6 @@ package org.abcframework.common.logging;
 
 import static org.junit.Assert.assertEquals;
 
-import org.abcframework.common.logging.CommonLogFileTypes;
 import org.junit.Test;
 
 public class CommonLogFileTypesJUnit4Test {
